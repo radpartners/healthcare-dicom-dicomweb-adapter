@@ -195,6 +195,20 @@ public class Flags {
   )
   Boolean sendToAllMatchingDestinations = false;
 
+  @Parameter(
+      names = {"--max-ops-invoked"},
+      description = "The maximum number of operations an AE may invoke asynchronously, " +
+          "default is synchronous operation."
+  )
+  Integer maxOpsInvoked = null;
+
+  @Parameter(
+      names = {"--max-ops-performed"},
+      description = "The maximum number of operations an AE may perform asynchronously, " +
+          "default is synchronous operation."
+  )
+  Integer maxOpsPerformed = null;
+
   public Flags() {
   }
 }

@@ -28,6 +28,10 @@ public class DeviceUtil {
 
   private static final String ALL_ALLOWED_SOP_CLASSES = "*";
   private static final String ALL_ALLOWED_TRANSFER_SYNTAXES = "*";
+
+  private static Integer maxOpsInvoked = null;
+  private static Integer maxOpsPerformed = null;
+
   private DeviceUtil() {
   }
 
@@ -58,6 +62,15 @@ public class DeviceUtil {
     Device device = new Device("dicom-to-dicomweb-adapter-server");
     Connection connection = new Connection();
     connection.setPort(dicomPort);
+
+    if (maxOpsInvoked != null) {
+      connection.setMaxOpsInvoked(maxOpsInvoked);
+    }
+
+    if (maxOpsPerformed != null) {
+      connection.setMaxOpsPerformed(maxOpsPerformed);
+    }
+
     device.addConnection(connection);
 
     // Create an application entity (a network node) listening on input port.
@@ -84,6 +97,23 @@ public class DeviceUtil {
     device.addApplicationEntity(applicationEntity);
     device.setScheduledExecutor(Executors.newSingleThreadScheduledExecutor());
     device.setExecutor(Executors.newCachedThreadPool());
+
+    if (maxOpsInvoked != null) {
+      connection.setMaxOpsInvoked(maxOpsInvoked);
+    }
+
+    if (maxOpsPerformed != null) {
+      connection.setMaxOpsPerformed(maxOpsPerformed);
+    }
+
     return device;
+  }
+
+  public static void setMaxOpsInvoked(Integer maxOpsInvoked) {
+    DeviceUtil.maxOpsInvoked = maxOpsInvoked;
+  }
+
+  public static void setMaxOpsPerformed(Integer maxOpsPerformed) {
+    DeviceUtil.maxOpsPerformed = maxOpsPerformed;
   }
 }

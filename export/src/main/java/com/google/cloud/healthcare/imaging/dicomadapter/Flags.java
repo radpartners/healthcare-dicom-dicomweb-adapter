@@ -106,5 +106,19 @@ public class Flags {
   )
   String monitoringProjectId = "";
 
+  @Parameter(
+      names = {"--max-ops-invoked"},
+      description = "The maximum number of operations an AE may invoke asynchronously, " +
+          "default is synchronous operation. Only used if used in C-Store mode."
+  )
+  Integer maxOpsInvoked = null;
+
+  @Parameter(
+      names = {"--max-ops-performed"},
+      description = "The maximum number of operations an AE may perform asynchronously, " +
+          "default is synchronous operation. Only used if used in C-Store mode."
+  )
+  Integer maxOpsPerformed = null;
+
   public Flags() {}
 }

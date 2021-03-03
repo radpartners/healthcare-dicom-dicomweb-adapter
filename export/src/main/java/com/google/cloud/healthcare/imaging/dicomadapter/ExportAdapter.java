@@ -99,6 +99,10 @@ public class ExportAdapter {
       // C-Store sender.
       //
       // DIMSE application entity.
+
+      DeviceUtil.setMaxOpsInvoked(flags.maxOpsInvoked);
+      DeviceUtil.setMaxOpsPerformed(flags.maxOpsPerformed);
+
       ApplicationEntity applicationEntity = new ApplicationEntity("EXPORTADAPTER");
       Connection conn = new Connection();
       DeviceUtil.createClientDevice(applicationEntity, conn);

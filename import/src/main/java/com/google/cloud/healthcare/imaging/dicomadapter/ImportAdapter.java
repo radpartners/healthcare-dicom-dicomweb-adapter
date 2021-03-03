@@ -150,6 +150,9 @@ public class ImportAdapter {
     // Handle Storage Commitment N-ACTION
     serviceRegistry.addDicomService(new StorageCommitmentService(dicomWebClient, aetDict));
 
+    DeviceUtil.setMaxOpsInvoked(flags.maxOpsInvoked);
+    DeviceUtil.setMaxOpsPerformed(flags.maxOpsPerformed);
+
     // Start DICOM server
     Device device = DeviceUtil.createServerDevice(flags.dimseAET, flags.dimsePort, serviceRegistry);
     device.bindConnections();
