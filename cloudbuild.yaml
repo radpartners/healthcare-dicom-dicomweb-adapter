@@ -1,10 +1,18 @@
 steps:
-
 - name: ${_GRADLE_IMAGE}
-  id: build-adapter
-  args:
-  - gradle
-  - build
-
+  id: build-import-adapter
+  dir: import
+  args: [ 'gradle', 'dockerBuildImage', '-Pdocker_tag=gcr.io/${PROJECT_ID}/dicom-import-adapter' ]
+  waitFor: [ '-' ]
+- name: ${_GRADLE_IMAGE}
+  id: build-export-adapter
+  dir: export
+  args: [ 'gradle', 'dockerBuildImage', '-Pdocker_tag=gcr.io/${PROJECT_ID}/dicom-export-adapter' ]
+  waitFor: [ '-' ]
 substitutions:
   _GRADLE_IMAGE: 'gradle:5.6-jdk11'
+images:
+  - gcr.io/${PROJECT_ID}/dicom-import-adapter
+  - gcr.io/${PROJECT_ID}/dicom-export-adapter
+options:
+  machineType: 'N1_HIGHCPU_8'
